@@ -1,16 +1,16 @@
 myfile = open("jobdescription.txt") #takes in job description
 words = myfile.read() 
-wordlist = words.split() #splits up the text into individual pieces
-
+baselist = words.split() #splits up the text into individual pieces
+wordlist = []
+for word in baselist:
+    wordlist.append(word.lower()) #lower cases everything for analysis 
+    
+useless = ["if", "and", "the", "for", "to", "a", "are", "by", "with", "of", "in", "their", "this", "from", "be", "-", "will", "an", "is", "as", "on", "that", "our", "we"]
 
 wordfreq = [] #serts blank list
 for word in wordlist:
     wordfreq.append(wordlist.count(word)) #adds a count to the list
 
-for w, z in zip(wordfreq, wordlist):####################FIX THIS IT ISNT HJOLDING THE CHANGE
-    if w == 1:
-        wordfreq.remove(w)
-        wordlist.remove(z)
 
 wordfreq = [int(w) for w in wordfreq] #converts count into integers from string
 
@@ -23,7 +23,10 @@ above5 = []
 above10 = []
 
 for word, count in zip(wordlist, wordfreq):
-    if count > 10:
+    if (word in useless):
+        None  
+
+    elif count > 10:
         above10.append([word, count])
         above10dic = dict(above10)
         
